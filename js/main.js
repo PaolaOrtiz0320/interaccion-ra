@@ -14,7 +14,7 @@ let modelHeight = 1;
 
 // ----- AJUSTES DE TAMAÑO -----
 const TARGET_DESKTOP_HEIGHT = 140; // tamaño en modo normal (un poco más grande en pantalla)
-const TARGET_AR_HEIGHT = 0.9;      // altura aprox. en metros en AR (vertical)
+const TARGET_AR_HEIGHT = 0.8;      // altura aprox. en metros en AR (vertical)
 const AR_EXTRA_DOWN = 0.45;        // baja un poco el modelo para tocar mejor el suelo
 // --------------------------------
 
