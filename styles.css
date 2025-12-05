@@ -1,3 +1,4 @@
+```css
 :root {
   --bg-main-1: #020718;
   --bg-main-2: #05172f;
@@ -206,9 +207,10 @@ footer.app-footer .hint {
 
 /* Responsive vertical (móvil) */
 @media (max-width: 768px) and (orientation: portrait) {
+  /* panel arriba para no tapar al policía */
   #ui-overlay {
-    top: auto;
-    bottom: 74px;
+    top: 70px;        /* justo debajo de la navbar */
+    bottom: auto;
     right: 10px;
     left: 10px;
     width: auto;
@@ -216,6 +218,8 @@ footer.app-footer .hint {
 
   .ui-card {
     padding: 10px 11px;
+    max-height: 40vh;   /* por si hay muchos botones */
+    overflow-y: auto;   /* scroll interno */
   }
 
   .anim-btn {
