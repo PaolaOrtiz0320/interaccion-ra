@@ -1,0 +1,256 @@
+/* styles.css */
+:root {
+  --bg-main-1: #020f08;
+  --bg-main-2: #132a13;
+  --bg-main-3: #1b4332;
+  --accent: #95d5b2;
+  --accent-soft: rgba(149, 213, 178, 0.25);
+  --accent-alt: #ffe66d;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 0% 0%, #1b4332 0, transparent 50%),
+    radial-gradient(circle at 90% 10%, #081c15 0, transparent 55%),
+    radial-gradient(circle at 50% 100%, #000 0, var(--bg-main-1) 65%);
+  color: #f8f9fa;
+}
+
+/* Canvas WebXR */
+#app-container {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Navbar */
+.navbar-glass {
+  background: linear-gradient(90deg, rgba(4, 12, 6, 0.96), rgba(10, 30, 16, 0.95));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(163, 181, 138, 0.4);
+  z-index: 1000;
+}
+
+.brand-orb {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 30% 30%, #ffe66d 0, #95d5b2 45%, #2d6a4f 80%);
+  color: #111;
+  font-weight: 700;
+  font-size: 0.75rem;
+  box-shadow:
+    0 0 10px rgba(149, 213, 178, 0.9),
+    0 0 20px rgba(40, 73, 55, 0.9);
+}
+
+/* Panel lateral con botones (modo pantalla normal) */
+#ui-overlay {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  width: 270px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+  z-index: 900;
+}
+
+.ui-card {
+  background: rgba(6, 18, 10, 0.94);
+  border-radius: 18px;
+  border: 1px solid rgba(149, 213, 178, 0.35);
+  padding: 14px 16px;
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(0, 0, 0, 0.35);
+  pointer-events: auto;
+}
+
+#ui-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: #e9f5e9;
+  margin-bottom: 4px;
+}
+
+#ui-subtitle {
+  font-size: 0.72rem;
+  color: #cfd8cf;
+  margin-bottom: 12px;
+}
+
+/* Botones de animación */
+.anim-btn {
+  background:
+    linear-gradient(120deg, rgba(52, 78, 65, 0.95), rgba(25, 52, 36, 0.95));
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: #f8f9fa;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  pointer-events: auto;
+  transition:
+    transform 0.16s ease,
+    background 0.16s ease,
+    box-shadow 0.16s ease,
+    border-color 0.16s ease;
+  text-align: center;
+  width: 100%;
+  border: 1px solid rgba(163, 181, 138, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.anim-btn span.label {
+  flex: 1;
+  text-align: left;
+}
+
+.anim-btn span.badge {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 999px;
+  padding: 2px 8px;
+  color: #e9ecef;
+}
+
+.anim-btn:hover {
+  background:
+    linear-gradient(120deg, rgba(88, 129, 87, 1), rgba(52, 78, 65, 1));
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.85);
+  border-color: rgba(255, 230, 109, 0.9);
+}
+
+.anim-btn.active {
+  background:
+    linear-gradient(135deg, #344e41, #588157, #a3b18a);
+  border-color: rgba(255, 230, 109, 0.96);
+  box-shadow:
+    0 18px 40px rgba(88, 129, 87, 0.9),
+    0 0 24px rgba(255, 230, 109, 0.8);
+}
+
+/* Footer */
+footer.app-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 800;
+  background: linear-gradient(90deg, rgba(3, 10, 6, 0.98), rgba(12, 26, 14, 0.97));
+  color: #ced4da;
+  font-size: 0.7rem;
+  padding: 5px 12px 7px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(149, 213, 178, 0.4);
+}
+
+footer.app-footer .status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: rgba(88, 129, 87, 0.25);
+  border: 1px solid rgba(149, 213, 178, 0.7);
+  font-size: 0.65rem;
+  color: #e9ecef;
+  text-transform: uppercase;
+  letter-spacing: 0.85px;
+}
+
+footer.app-footer .status-pill span.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #95d5b2;
+  box-shadow: 0 0 12px rgba(149, 213, 178, 0.95);
+}
+
+footer.app-footer .hint {
+  font-size: 0.65rem;
+  color: #e5e9e5;
+}
+
+/* Responsive vertical (móvil) */
+@media (max-width: 768px) and (orientation: portrait) {
+  #ui-overlay {
+    top: auto;
+    bottom: 74px;
+    right: 10px;
+    left: 10px;
+    width: auto;
+  }
+
+  .ui-card {
+    padding: 10px 11px;
+  }
+
+  .anim-btn {
+    font-size: 0.76rem;
+  }
+
+  footer.app-footer {
+    font-size: 0.65rem;
+  }
+}
+
+/* Responsive horizontal (móvil acostado) */
+@media (max-width: 992px) and (orientation: landscape) {
+  #ui-overlay {
+    top: 64px;
+    right: 10px;
+    left: auto;
+    width: 220px;
+  }
+
+  #ui-subtitle {
+    display: none; /* para no tapar tanto la pantalla */
+  }
+
+  .ui-card {
+    padding: 8px 10px;
+  }
+
+  .anim-btn {
+    font-size: 0.7rem;
+    padding: 6px 9px;
+  }
+
+  footer.app-footer {
+    font-size: 0.62rem;
+  }
+}
