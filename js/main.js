@@ -25,11 +25,12 @@ let gazeDwellTime = 0;
 const DWELL_TIME_THRESHOLD = 1.3;
 let inAR = false;
 
-// Gestos táctiles en AR
+// Gestos táctiles
 let primaryPointer = null;
 let secondaryPointer = null;
 let dragStart = { x: 0, y: 0 };
 let modelStartPos = new THREE.Vector3();
+let modelStartRotationY = 0;
 let pinchStartDistance = 0;
 let modelStartScale = 1;
 
@@ -381,7 +382,7 @@ function createVRInterface() {
   });
 }
 
-/* ---------- GESTOS TÁCTILES EN AR (mover y escalar) ---------- */
+/* ---------- GESTOS TÁCTILES (mover, escalar, girar) ---------- */
 
 function setupTouchGestures() {
   const dom = renderer.domElement;
@@ -393,7 +394,7 @@ function setupTouchGestures() {
 }
 
 function onPointerDown(event) {
-  if (!inAR || !character) return;
+  if (!character) return;
 
   domSetPointerCapture(event);
 
@@ -406,6 +407,7 @@ function onPointerDown(event) {
     dragStart.x = event.clientX;
     dragStart.y = event.clientY;
     modelStartPos.copy(character.position);
+    modelStartRotationY = character.rotation.y;
   } else if (!secondaryPointer && event.pointerId !== primaryPointer.id) {
     secondaryPointer = {
       id: event.pointerId,
@@ -418,7 +420,7 @@ function onPointerDown(event) {
 }
 
 function onPointerMove(event) {
-  if (!inAR || !character) return;
+  if (!character) return;
 
   if (primaryPointer && event.pointerId === primaryPointer.id) {
     primaryPointer.x = event.clientX;
@@ -435,22 +437,17 @@ function onPointerMove(event) {
       const factor = currentDist / pinchStartDistance;
       let newScale = modelStartScale * factor;
       const baseARScale = TARGET_AR_HEIGHT / modelHeight;
-      newScale = THREE.MathUtils.clamp(newScale, 0.4 * baseARScale, 1.6 * baseARScale);
+      newScale = THREE.MathUtils.clamp(newScale, 0.4 * baseARScale, 1.8 * baseARScale);
       character.scale.setScalar(newScale);
     }
     return;
   }
 
-  // drag (un dedo) → mover en X/Z
+  // drag (un dedo) → girar alrededor del eje Y
   if (primaryPointer && !secondaryPointer) {
     const dx = (primaryPointer.x - dragStart.x) / window.innerWidth;
-    const dy = (primaryPointer.y - dragStart.y) / window.innerHeight;
-
-    const moveX = dx * 1.5;
-    const moveZ = dy * 1.5;
-
-    character.position.x = modelStartPos.x + moveX;
-    character.position.z = modelStartPos.z + moveZ;
+    const rotationSpeed = Math.PI * 2; // una vuelta completa por todo el ancho
+    character.rotation.y = modelStartRotationY - dx * rotationSpeed;
   }
 }
 
